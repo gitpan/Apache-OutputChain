@@ -9,7 +9,7 @@ package Apache::OutputChain;
 use 5.004;
 use strict;
 use vars qw( $VERSION $DEBUG );
-$VERSION = 0.09;
+$VERSION = '0.10';
 
 use Apache::Constants ':common';
 $DEBUG = 0;
@@ -25,8 +25,9 @@ sub handler
 	print STDERR "    Apache::OutputChain tied $class -> ",
 		$reftied ? $reftied : 'STDOUT', "\n" if DEBUG;
 
-	### untie *STDOUT;
-	### this provoked untie attempted while 1 inner references still exist
+	local $^W = 0;
+	undef *STDOUT;
+	untie *STDOUT;
 	tie *STDOUT, $class, $r;
 
 	if ($reftied eq 'Apache')	{ tie *STDOUT, $class, $r; }
@@ -126,7 +127,7 @@ will call I<PRINT> method of the next class.
 
 =head1 VERSION
 
-0.09
+0.10
 
 =head1 AUTHOR
 

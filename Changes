@@ -1,6 +1,9 @@
 
 Changes of Apache::OutputChain and related packages:
 
+0.10 Mon Aug 26 14:36:59 MET DST 2002
+	Used undef *STDOUT and returned the untie.
+
 0.09 Mon Aug 26 12:38:53 MET DST 2002
 	Removed untie *STDOUT, suggested by Andreas Koenig.
 
