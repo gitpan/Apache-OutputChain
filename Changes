@@ -1,13 +1,15 @@
 
-0.04 Thu Apr  9 13:35:41 MET DST 1998
+0.05 Tue Aug 18 16:23:05 MET DST 1998
+	Apache::SSIChain fixed to work with the new Apache::SSI 1.91.
+	This meant changing as_HTML to get_output. Documentation
+	extended.
 
-Added module Apache::SSIChain.
+0.04 Thu Apr  9 13:35:41 MET DST 1998
+	Added module Apache::SSIChain.
 
 0.03 Tue Feb  3 13:51:12 MET 1998
-
-Added a small bug fix by Andreas Koenig in MakeCapital.
+	Added a small bug fix by Andreas Koenig in MakeCapital.
 
 0.02
-
-Original release.
+	Original release.
 

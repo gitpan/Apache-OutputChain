@@ -3,6 +3,7 @@ MANIFEST
 MakeCapital.pm
 Makefile.PL
 OutputChain.pm
+PassExec.pm
 PassHtml.pm
 SSIChain.pm
 README
