@@ -9,7 +9,7 @@ package Apache::OutputChain;
 use 5.004;
 use strict;
 use vars qw( $VERSION $DEBUG );
-$VERSION = '0.10';
+$VERSION = '0.11';
 
 use Apache::Constants ':common';
 $DEBUG = 0;
@@ -26,7 +26,7 @@ sub handler
 		$reftied ? $reftied : 'STDOUT', "\n" if DEBUG;
 
 	local $^W = 0;
-	undef *STDOUT;
+	### undef *STDOUT;
 	untie *STDOUT;
 	tie *STDOUT, $class, $r;
 
@@ -127,7 +127,7 @@ will call I<PRINT> method of the next class.
 
 =head1 VERSION
 
-0.10
+0.11
 
 =head1 AUTHOR
 

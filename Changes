@@ -1,6 +1,11 @@
 
 Changes of Apache::OutputChain and related packages:
 
+0.11 Wed Aug 28 11:35:41 MET DST 2002
+	On 5.6.1, undef *STDOUT caused coredumps. Commented out. Feel
+	free to modify the source code in such a way that it works on
+	your version of perl.
+
 0.10 Mon Aug 26 14:36:59 MET DST 2002
 	Used undef *STDOUT and returned the untie.
 
