@@ -1,0 +1,5 @@
+MANIFEST
+MakeCapital.pm
+Makefile.PL
+OutputChain.pm
+PassHtml.pm
