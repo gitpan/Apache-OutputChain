@@ -1,5 +1,5 @@
 
-my @output_chain_libs = qw( OutputChain MakeCapital PassHtml );
+my @output_chain_libs = qw( OutputChain MakeCapital PassHtml SSIChain);
 
 use ExtUtils::MakeMaker;
 WriteMakefile(

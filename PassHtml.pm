@@ -17,7 +17,7 @@ In the conf/access.conf file of your Apache installation add lines
 This is simple script to show the use of module B<Apache::OutputChain>.
 It will pick up a html file and send it to the output, STDOUT. We
 assume that the output is tied either to Apache (by default), or some
-user defined perl handler. We need to read and write to STDOUT in perl
+user-defined perl handler. We need to read and write to STDOUT in perl
 since Apache will not pass its output into perl handlers.
 
 =head1 AUTHOR
@@ -29,6 +29,7 @@ at Faculty of Informatics, Masaryk University, Brno
 =cut
 
 package Apache::PassHtml;
+use strict;
 use Apache::Constants ':common';
 sub handler
 	{

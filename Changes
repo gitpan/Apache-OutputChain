@@ -1,4 +1,8 @@
 
+0.04 Thu Apr  9 13:35:41 MET DST 1998
+
+Added module Apache::SSIChain.
+
 0.03 Tue Feb  3 13:51:12 MET 1998
 
 Added a small bug fix by Andreas Koenig in MakeCapital.

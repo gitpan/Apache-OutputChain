@@ -1,7 +1,8 @@
-CHANGES
+Changes
 MANIFEST
 MakeCapital.pm
 Makefile.PL
 OutputChain.pm
 PassHtml.pm
+SSIChain.pm
 README

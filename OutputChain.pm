@@ -5,19 +5,20 @@ Apache::OutputChain - chain stacked Perl handlers
 
 =head1 SYNOPSIS
 
-Inherit from this module to put a new one into the chain.
+Inherit from this module to put a new handler into the chain.
 
 =head1 DESCRIPTION
 
-This module allows chaining perl handlers in Apache, which enables to
-make filter modules that take output from previous handlers, make some
-modifications, and pass the output to the next handler.
+This module allows chaining perl handlers in Apache, which allows you
+to make filter modules that take output from previous handlers, make
+some modifications, and pass the output to the next handler or out to
+browser.
 
 I will try to explain how this module works, because I hope you could
 help me to make it better and mature.
 
 When the I<handler> function is called, it checks if it gets
-a reference to a class. If this is true, the this function was called
+a reference to a class. If this is true, then this function was called
 from some other handler that wants to be put into the chain. If not,
 it's probably an initialization (first call) of this package and we
 will supply name of this package.
@@ -35,32 +36,37 @@ will call I<PRINT> method of the next class.
 
 =head1 SEE ALSO
 
-Apache::GzipChain by Andreas Koenig, koenig@kulturbox.de for module
-that gzips the output on the fly.
+Apache::GzipChain by Andreas Koenig for solution that gzips the output
+on the fly. Apache::SSIChain for a quick hack showing the use of
+parsed html (SSI) module in the chain.
 
 =head1 AUTHOR
 
-(c) 1997 Jan Pazdziora, adelton@fi.muni.cz
-
-at Faculty of Informatics, Masaryk University, Brno
+(c) 1997--1998 Jan Pazdziora, adelton@fi.muni.cz,
+http://www.fi.muni.cz/~adelton/ at Faculty of Informatics, Masaryk
+University, Brno, Czech Republic
 
 =cut
 
 package Apache::OutputChain;
-$VERSION = '0.03';
+use 5.004;
+use strict;
+use vars qw( $VERSION $DEBUG );
+$VERSION = 0.04;
+
 use Apache::Constants ':common';
-$DEBUG = 1;
+$DEBUG = 0;
 sub DEBUG()	{ $DEBUG; }
 sub handler
 	{
 	my $r = shift;
 	my $class = shift;
-	$class = 'Apache::OutputChain' unless defined $class;
+	$class = __PACKAGE__ unless defined $class;
 
 	my $tied = tied *STDOUT;
 	my $reftied = ref $tied;
 	print STDERR "    Apache::OutputChain tied $class -> ",
-		$reftied ? $reftied : STDOUT, "\n" if DEBUG;
+		$reftied ? $reftied : 'STDOUT', "\n" if DEBUG;
 
 	untie *STDOUT;
 	tie *STDOUT, $class, $r;
@@ -73,6 +79,9 @@ sub TIEHANDLE
 	{
 	my ($class, @opt) = @_;
 	my $self = [ @opt ];
+		# @opt should be set up to $r (request structure
+		# reference) and optionally the next handler in the
+		# row
 	print STDERR "    Apache::OutputChain::TIEHANDLE $self\n"
 		if DEBUG;
 	bless $self, $class;
@@ -80,12 +89,11 @@ sub TIEHANDLE
 sub PRINT
 	{
 	my $self = shift;
-	my @tmp = @_;
 	print STDERR "    Apache::OutputChain::PRINT $self\n"
 		if DEBUG;
 
-	if (defined $self->[1])		{ $self->[1]->PRINT(@tmp); }
-	elsif (defined $self->[0])	{ $self->[0]->print(@tmp); }
+	if (defined $self->[1])		{ $self->[1]->PRINT(@_); }
+	elsif (defined $self->[0])	{ $self->[0]->print(@_); }
 	}
 
 1;
