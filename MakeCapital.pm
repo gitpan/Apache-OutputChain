@@ -42,10 +42,7 @@ sub handler
 
 sub PRINT
 	{
-	my $self = shift;
-	local ($_) = join '', @_;
-	s/$_/\U$_/;
-	$self->Apache::OutputChain::PRINT($_);
+	shift->Apache::OutputChain::PRINT(uc join '', @_);
 	}
 1;
 

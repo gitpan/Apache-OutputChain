@@ -1,7 +1,7 @@
 
 =head1 NAME
 
-Apache::OutputChain - chain stacked PERL handlers
+Apache::OutputChain - chain stacked Perl handlers
 
 =head1 SYNOPSIS
 
@@ -33,6 +33,11 @@ there is not other class behind, the I<print> method of Apache will be
 called. If this is not the last user defined handler in the chain, we
 will call I<PRINT> method of the next class.
 
+=head1 SEE ALSO
+
+Apache::GzipChain by Andreas Koenig, koenig@kulturbox.de for module
+that gzips the output on the fly.
+
 =head1 AUTHOR
 
 (c) 1997 Jan Pazdziora, adelton@fi.muni.cz
@@ -42,7 +47,7 @@ at Faculty of Informatics, Masaryk University, Brno
 =cut
 
 package Apache::OutputChain;
-$VERSION = '0.02';
+$VERSION = '0.03';
 use Apache::Constants ':common';
 $DEBUG = 1;
 sub DEBUG()	{ $DEBUG; }

@@ -1,0 +1,40 @@
+NAME
+    Apache::OutputChain - chain stacked Perl handlers
+
+SYNOPSIS
+    Inherit from this module to put a new one into the chain.
+
+DESCRIPTION
+    This module allows chaining perl handlers in Apache, which enables to
+    make filter modules that take output from previous handlers, make some
+    modifications, and pass the output to the next handler.
+
+    I will try to explain how this module works, because I hope you could
+    help me to make it better and mature.
+
+    When the *handler* function is called, it checks if it gets a reference
+    to a class. If this is true, the this function was called from some
+    other handler that wants to be put into the chain. If not, it's probably
+    an initialization (first call) of this package and we will supply name
+    of this package.
+
+    Now we check, where is STDOUT tied. If it is Apache, we are the first
+    one trying to be put into the chain. If it is not, there is somebody in
+    the chain already. We call tie on the STDOUT, steal it from anybody who
+    had it before -- either Apache or the other class.
+
+    When later anybody prints into STDOUT, it will call function *PRINT* of
+    the first class in the chain (the last one that registered). If there is
+    not other class behind, the *print* method of Apache will be called. If
+    this is not the last user defined handler in the chain, we will call
+    *PRINT* method of the next class.
+
+SEE ALSO
+    Apache::GzipChain by Andreas Koenig, koenig@kulturbox.de for module that
+    gzips the output on the fly.
+
+AUTHOR
+    (c) 1997 Jan Pazdziora, adelton@fi.muni.cz
+
+    at Faculty of Informatics, Masaryk University, Brno
+
