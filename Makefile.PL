@@ -8,5 +8,6 @@ WriteMakefile(
 ###	PM		=> { map { ("$_.pm" => "\$(INST_LIBDIR)/$_.pm") } @output_chain_libs },
 	dist		=> { COMPRESS => 'gzip -9f', SUFFIX => 'gz',
 		POSTOP => 'mv $(DISTNAME)-$(VERSION).tar.gz ../' },
+	PREREQ_PM => { 'Apache::Constants' => 0 },
 	);
 

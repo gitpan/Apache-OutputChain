@@ -9,7 +9,7 @@ package Apache::OutputChain;
 use 5.004;
 use strict;
 use vars qw( $VERSION $DEBUG );
-$VERSION = 0.07;
+$VERSION = 0.08;
 
 use Apache::Constants ':common';
 $DEBUG = 0;
@@ -125,7 +125,7 @@ will call I<PRINT> method of the next class.
 
 =head1 VERSION
 
-0.07
+0.08
 
 =head1 AUTHOR
 

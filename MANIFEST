@@ -7,3 +7,4 @@ PassExec.pm
 PassHtml.pm
 SSIChain.pm
 README
+t/use.t

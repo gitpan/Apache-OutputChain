@@ -1,6 +1,9 @@
 
 Changes of Apache::OutputChain and related packages:
 
+0.08 Thu Aug  8 19:41:40 MET DST 2002
+	Added minimal tests.
+
 0.07 Fri Oct  1 10:05:55 MET DST 1999
 	Fixed problem with Apache::SSIChain, now doesn't use the tree
 	method, patch by Perrin Harkins.
