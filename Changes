@@ -1,6 +1,10 @@
 
 Changes of Apache::OutputChain and related packages:
 
+0.07 Fri Oct  1 10:05:55 MET DST 1999
+	Fixed problem with Apache::SSIChain, now doesn't use the tree
+	method, patch by Perrin Harkins.
+
 0.06 Wed Aug 19 10:07:18 MET DST 1998
 	Fixed problem with cooperation with Apache::SSI and
 	HTML::SimpleParse 0.04, patch by Ken Williams.

@@ -10,7 +10,7 @@ use Apache::SSI;
 use Apache::OutputChain;
 
 use vars qw( $VERSION @ISA );
-$VERSION = 0.06;
+$VERSION = 0.07;
 @ISA = qw( Apache::OutputChain );
 
 my $html_parser;
@@ -23,11 +23,7 @@ sub handler
 sub PRINT {
 	my $self = shift;
 	$html_parser->text(join '', @_);
-	$html_parser->parse;
-	foreach ($html_parser->tree)
-		{
-		$self->Apache::OutputChain::PRINT($html_parser->execute($_));
-		}
+	$self->Apache::OutputChain::PRINT($html_parser->get_output());
 	}
 
 1;
@@ -75,11 +71,11 @@ or even on modules processed by Apache::Registry:
 
 =head1 VERSION
 
-0.06
+0.07
 
 =head1 AUTHOR
 
-(c) 1998 Jan Pazdziora, adelton@fi.muni.cz,
+(c) 1998--1999 Jan Pazdziora, adelton@fi.muni.cz,
 http://www.fi.muni.cz/~adelton/ at Faculty of Informatics, Masaryk
 University, Brno, Czech Republic
 
