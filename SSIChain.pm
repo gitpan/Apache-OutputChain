@@ -10,30 +10,23 @@ use Apache::SSI;
 use Apache::OutputChain;
 
 use vars qw( $VERSION @ISA );
-$VERSION = 0.05;
+$VERSION = 0.06;
 @ISA = qw( Apache::OutputChain );
 
 my $html_parser;
 sub handler
 	{
 	my $r = shift;
-	$html_parser = new Apache::SSI;
+	$html_parser = new Apache::SSI('', $r);
 	Apache::OutputChain::handler($r, __PACKAGE__);
 	}
 sub PRINT {
 	my $self = shift;
-	my $line = join '', @_;
-	if ($html_parser->can('as_HTML'))
+	$html_parser->text(join '', @_);
+	$html_parser->parse;
+	foreach ($html_parser->tree)
 		{
-		$html_parser->parse($line);
-		if ($line =~ m!</HTML>!i)
-			{ $self->Apache::OutputChain::PRINT($html_parser->as_HTML); }
-		}
-	else
-		{
-		$html_parser->text($line);
-		$html_parser->parse;
-		$self->Apache::OutputChain::PRINT($html_parser->get_output);
+		$self->Apache::OutputChain::PRINT($html_parser->execute($_));
 		}
 	}
 
@@ -82,7 +75,7 @@ or even on modules processed by Apache::Registry:
 
 =head1 VERSION
 
-0.05
+0.06
 
 =head1 AUTHOR
 

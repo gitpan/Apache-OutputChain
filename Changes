@@ -1,4 +1,12 @@
 
+Changes of Apache::OutputChain and related packages:
+
+0.06 Wed Aug 19 10:07:18 MET DST 1998
+	Fixed problem with cooperation with Apache::SSI and
+	HTML::SimpleParse 0.04, patch by Ken Williams.
+
+	Added note about PERL_STACKED_HANDLERS to the docs.
+
 0.05 Tue Aug 18 16:23:05 MET DST 1998
 	Apache::SSIChain fixed to work with the new Apache::SSI 1.91.
 	This meant changing as_HTML to get_output. Documentation

@@ -9,7 +9,7 @@ package Apache::OutputChain;
 use 5.004;
 use strict;
 use vars qw( $VERSION $DEBUG );
-$VERSION = 0.05;
+$VERSION = 0.06;
 
 use Apache::Constants ':common';
 $DEBUG = 0;
@@ -56,8 +56,9 @@ sub PRINT
 
 =head1 SYNOPSIS
 
-In the conf/access.conf file of your Apache installation, add lines
-like
+You need reasonably new version of Apache httpd, compiled with
+mod_perl with PERL_STACKED_HANDLERS enabled. In the conf/access.conf
+file of your Apache installation, add lines like
 
 	<Files *.html>
 	SetHandler perl-script
@@ -124,7 +125,7 @@ will call I<PRINT> method of the next class.
 
 =head1 VERSION
 
-0.05
+0.06
 
 =head1 AUTHOR
 
